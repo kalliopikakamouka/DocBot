@@ -1,0 +1,10 @@
+[
+  {
+    "name": "social_security_number",
+    "pattern": "\\d{11}"
+  },
+  {
+    "name": "doctor_name",
+    "pattern": "(\\bDr\\.\\ Mpekou\\ Anastasia\\b|\\bMpekou\\ Anastasia\\b|\\bMpekou\\b|\\bDr\\.\\ Mpekou\\ Anastasia\\b|\\bMpekou\\ Anastasia\\b|\\bMpekou\\b|\\bDr\\.\\ Mpekou\\ Anastasia\\b|\\bMpekou\\ Anastasia\\b|\\bMpekou\\b|\\bDr\\.\\ Konstantinou\\b|\\bDr\\.\\ Stavrou\\b|\\bDr\\.\\ Sekos\\b|\\bDr\\.\\ Papakonstantinou\\b)"
+  }
+]

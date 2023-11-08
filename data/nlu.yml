@@ -1,0 +1,230 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - of course
+    - sure
+    - that sounds good
+    - correct
+    - yes thank you
+    - great
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - no thanks
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - nevermind
+    - nvm
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: book_an_appointment
+  examples:  |
+    - I would like to book an appointment with a doctor
+    - I want to book an appointment
+    - appointment
+    - can I book an appointment please?
+    - I want to book an apointment with a doctor
+    - doctor appointment
+    - I need to see a doctor
+    - appointment with a doctor
+    - doctor
+    - doc appt
+
+- intent: greet_and_book_same_sentence
+  examples:  |
+    - hi i would like to book an appointment with a doctor?
+    - hello can I please book an appointment with a doctor?
+
+- intent: give_social_security_number
+  examples:  |
+    - my social security number is [123456789]{"entity": "social_security_number"}
+    - [123456789]{"entity": "social_security_number"}
+    - it's [123456789]{"entity": "social_security_number"}
+- regex: social_security_number
+  examples:  |
+    - \d{11}
+
+- intent: medical_specialty_opthalmologist
+  examples:  |
+    - opthalmologist
+    - i need to see an ophtalmologist
+    - i would like to see an ophtalmologist
+    - an ophtalmologist please
+
+- intent: medical_specialty_gynaecologist
+  examples:  |
+    - gynaecologist
+    - i need to see a gynaecologist
+    - i would like to see a gynaecologist
+    - a gynaecologist please
+
+- intent: medical_specialty_dermatologist
+  examples:  |
+    - dermatologist
+    - i need to see a dermatologist
+    - i would like to see a dermatologist
+    - a dermatologist please
+
+- intent: choose_an_opthalmologist
+  examples:  |
+    - I would like to book an appointment with [Dr. Papadopoulos Konstantinos](doctor_name)
+    - [Dr. Papadopoulos Konstantinos](doctor_name)
+    - [Dr. Papadopoulos](doctor_name)
+    - [Papadopoulos Konstantinos](doctor_name)
+    - [Papadopoulos](doctor_name)
+    - [Dr. Georgiou Anna](doctor_name)
+    - [Georgiou Anna](doctor_name)
+    - [Georgiou](doctor_name)
+    - [Dr. Ioannou Maria](doctor_name)
+    - [Ioannou Maria](doctor_name)
+    - [Ioannou](doctor_name)
+ 
+- lookup: doctor_name
+  examples:  |
+   - Dr. Mpekou Anastasia
+   - Mpekou Anastasia
+   - Mpekou
+
+- intent: choose_a_gynaecologist
+  examples:  |
+    - I would like to book an appointment with [Dr. Papakonstantinou Zoi](doctor_name)
+    - [Dr. Papakonstantinou Zoi](doctor_name)
+    - [Dr. Papakonstantinou](doctor_name)
+    - [Papakonstantinou Zoi](doctor_name)
+    - [Papakonstantinou](doctor_name)
+    - [Dr. Sekos Christos](doctor_name)
+    - [Sekos Christos](doctor_name)
+    - [Sekos](doctor_name)
+
+- lookup: doctor_name
+  examples:  |
+   - Dr. Mpekou Anastasia
+   - Mpekou Anastasia
+   - Mpekou
+
+- intent: choose_a_dermatologist
+  examples:  |
+    - I would like to book an appointment with [Dr. Konstantinou Dimitrios](doctor_name)
+    - [Dr. Konstantinou Dimitrios](doctor_name)
+    - [Dr. Konstantinou](doctor_name)
+    - [Konstantinou Dimitrios](doctor_name)
+    - [Konstantinou](doctor_name)
+    - [Dr. Stavrou Amalia](doctor_name)
+    - [Stavrou Amalia](doctor_name)
+    - [Stavrou](doctor_name)
+    
+- lookup: doctor_name
+  examples:  |
+   - Dr. Mpekou Anastasia
+   - Mpekou Anastasia
+   - Mpekou
+
+- intent: cancel_appointment
+  examples:  |
+    - hi, i would like to cancel my appointment
+    - cancel doctor's appointment
+    - cancel appointment
+    - cancel the appointment with [Dr. Konstantinou](doctor_name)
+    - i want to cancel my appointment with the dermatologist
+
+- lookup: doctor_name
+  examples:  |
+    - Dr. Konstantinou
+    - Dr. Stavrou
+    - Dr. Sekos
+    - Dr. Papakonstantinou
+
+# - intent: give_name_for_cancellation
+#   examples:  |
+#     - [ZOI EMMANOUILIDOU](patient_name)
+#     - [MARIA PAPADOPOULOU](patient_name)
+# - lookup: patient_name
+#   examples:  |
+#     - KONSTANTINIDOU ELENA
+#     - PAPACHRISTOU GEORGIOS
+#     - MARKOU DIMITRIOS
+#     - AVRAMIDIS PARASKEVAS
+
+- intent: ask_for_clinic_address
+  examples:  |
+    - can I please have the clinic's address?
+    - clinic's address
+    - address
+    - where is the clinic?
+    - clinic's location
+    - clinic location
+    - location
+    - where clinic
+
+- intent: ask_for_clinic_tel
+  examples:  |
+    - clinic's telephone number
+    - can I please have the clinic's number?
+    - telephone number
+    - I want to call the clinic
+    - call clinic telephone number
+    - clinic's secretary number
+
+- intent: ask_for_officehours
+  examples:  |
+    - what are the office hours?
+    - what time does the clinic open?
+    - what time does the clinic close?
+    - office hours 
+    - can I please have the office hours?
+
+# - intent: ask_emergency_number
+#   examples:  |
+#    - emergency
+#    - emergency number
+#    - I need the emergency number
+
+# - intent: thank 
+#   examples:  |
+#     - thank you
+#     - thanks
+#     - ty
+#     - thanks for the help

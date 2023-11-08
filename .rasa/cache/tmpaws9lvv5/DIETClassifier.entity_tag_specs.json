@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-name",
+      "2": "I-name",
+      "3": "L-name",
+      "4": "U-name",
+      "5": "B-social_security_number",
+      "6": "I-social_security_number",
+      "7": "L-social_security_number",
+      "8": "U-social_security_number",
+      "9": "B-social_security_number_cancel",
+      "10": "I-social_security_number_cancel",
+      "11": "L-social_security_number_cancel",
+      "12": "U-social_security_number_cancel",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-name": 1,
+      "I-name": 2,
+      "L-name": 3,
+      "U-name": 4,
+      "B-social_security_number": 5,
+      "I-social_security_number": 6,
+      "L-social_security_number": 7,
+      "U-social_security_number": 8,
+      "B-social_security_number_cancel": 9,
+      "I-social_security_number_cancel": 10,
+      "L-social_security_number_cancel": 11,
+      "U-social_security_number_cancel": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

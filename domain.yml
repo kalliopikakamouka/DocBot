@@ -1,0 +1,103 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - book_an_appointment
+  - bot_challenge
+  - greet_and_book_same_sentence
+  - give_social_security_number
+  - medical_specialty_opthalmologist
+  - medical_specialty_gynaecologist
+  - medical_specialty_dermatologist
+  - choose_an_opthalmologist
+  - choose_a_gynaecologist
+  - choose_a_dermatologist
+  - accept_proposed_date_time
+  - cancel_appointment
+  - give_name_for_cancellation
+  - ask_for_clinic_address
+  - ask_for_clinic_tel
+  - ask_for_officehours
+  # - ask_emergency_number
+  # - thank
+
+entities: 
+  - place
+  - doctor_name
+# - patient_name
+  - social_security_number
+
+responses:
+  utter_greet:
+  - text: "Hello, how may I help you?"
+
+  utter_goodbye:
+  - text: "Thank you for using DocBot, goodbye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_ask_for_social_security_number:
+  - text: 'Of course! I need your 10-digit social security number'
+
+  utter_ask_med_specialty: 
+  - text: 'Got it! What type of doctor would you like to see? (you could say: dermatologist)'
+
+  utter_suggest_opthalmologist_show_info:
+  - text: "there are 3 opthalmologists available: Dr. Papadopoulos Konstantinos, Dr. Georgiou Anna and Ioannou Maria. Which doctor would you like to visit?"
+
+  utter_suggest_gynaecologist_show_info:
+  - text: "there are 2 gynaecologists available: Dr. Papakonstantinou Zoi and Dr. Sekos Christos. Which doctor would you like to visit?"
+
+  utter_suggest_dermatologist_show_info:
+  - text: "there are 2 dermatologists available: Dr. Konstantinou Dimitrios and Dr. Stavrou Amalia. Which doctor would you like to visit?"
+  
+  utter_propose_date_time:
+  - text: "Great! Please choose a date and a time and complete the form: https://calendar.app.google/whroAPdvM8vGddkWA"
+
+  utter_confirm_booking:
+  - text: "Your appointment is confirmed. Is there anything else I can help you with?"
+
+  utter_ask_name_for_cancellation:
+  - text: "Absolutely! Please provide me with your full name as seen on your ID card in CAPITAL letters"
+
+  utter_verify_cancellation:
+  - text: "Your appointment on 15/11/23 with Dr. Sekos has been cancelled. Is there anything else I can do for you?"
+
+  utter_give_address_info:
+  - text: "The clinic's address is Praksitelous 34, Syntagma, Attiki, Athens"
+
+  utter_give_tel_number_info:
+  - text: "The clinic's number is 12345678910. You can call Mon-Fri 09:30-12:00"
+
+  utter_give_officehours_info:
+  - text: "The clinic is open Mon-Fri 08:30-17:00"
+
+  # utter_give_emergency_number:
+  # - text: "In case of an emergency please call 210987654372937"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+actions:
+  - utter_greet
+  - utter_goodbye
+  - utter_iamabot
+  # - utter_greet_and_initiate_booking
+  - utter_ask_for_social_security_number
+  - utter_ask_med_specialty
+  - utter_suggest_opthalmologist_show_info
+  - utter_suggest_gynaecologist_show_info
+  - utter_suggest_dermatologist_show_info
+  - utter_propose_date_time
+  - utter_confirm_booking
+  - utter_ask_name_for_cancellation
+  - utter_verify_cancellation
+  - utter_give_address_info
+  - utter_give_tel_number_info
+  - utter_give_officehours_info
+  # - utter_give_emergency_number
+  # - utter_cancel_appointment_send_confirmation

@@ -1,0 +1,56 @@
+version: "3.1"
+
+stories:
+ - story: book an appointment successfully
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: book_an_appointment
+   - action: utter_ask_med_specialty
+   - intent: medical_specialty_gynaecologist
+   - action: utter_suggest_gynaecologist_show_info
+   - intent: choose_a_gynaecologist
+     entities:
+     - name: doctor_name
+   - action: utter_propose_date_time
+   - intent: affirm
+   - action: utter_confirm_booking
+   - intent: deny
+   - action: utter_goodbye
+
+ - story: Cancel an appointment successfully
+   steps:
+   - intent: cancel_appointment
+   - action: utter_ask_for_social_security_number
+   - intent: give_social_security_number
+     entities:
+     - social_security_number: '12345678900'
+   - action: utter_verify_cancellation
+   - intent: goodbye
+   - action: utter_goodbye
+
+ - story: User asks for clinic's address
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: ask_for_clinic_address
+   - action: utter_give_address_info 
+
+ - story: User asks for clinic's telephone number
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: ask_for_clinic_tel
+   - action: utter_give_tel_number_info
+
+ - story: User asks for clinic's office hours
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: ask_for_officehours
+   - action: utter_give_officehours_info 
+
+#  - story: User asks for clinic's emergency number
+#    steps:
+#    - intent: ask_emergency_number
+#    - action: utter_give_emergency_number

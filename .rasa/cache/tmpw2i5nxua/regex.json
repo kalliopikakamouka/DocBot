@@ -1,0 +1,10 @@
+[
+  {
+    "name": "social_security_number",
+    "pattern": "\\d{11}"
+  },
+  {
+    "name": "name",
+    "pattern": "(\\bDr\\.\\ Georgiou\\ Anna\\b|\\bGeorgiou\\ Anna\\b|\\bGeorgiou\\b|\\bDr\\.\\ Ioannou\\ Maria\\b|\\bIoannou\\ Maria\\b|\\bIoannou\\b|\\bDr\\.\\ Sekos\\ Christos\\b|\\bSekos\\ Christos\\b|\\bSekos\\b|\\bDr\\.\\ Stavrou\\ Amalia\\b|\\bStavrou\\ Amalia\\b|\\bStavrou\\b|\\bKONSTANTINIDOU\\ ELENA\\b|\\bPAPACHRISTOU\\ GEORGIOS\\b|\\bMARKOU\\ DIMITRIOS\\b|\\bAVRAMIDIS\\ PARASKEVAS\\b)"
+  }
+]
