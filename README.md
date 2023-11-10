@@ -3,12 +3,15 @@
 This is my Project for the course M913 ("Διαλογικά Συστήματα και Φωνητικοί Βοηθοί"). Using RASA as my base, I had the chance to create my own, personalized chatbot called DocBot. The goal is to be able to book and cancel doctors' appointments and ask information about the clinic, simply by chatting with DocBot. The user can visit the clinic's website and communicate with the chatbot without having to call the clinic's receptionist, or wait in line for hours, just to fullfil a simple task. DocBot is available 24/7 and users can access it any time. It is important to note, that DocBot is not connected to any reservations system, meaning that the answers given are based on a hypothetical interaction between users and itself. The goal of this project, is to show how a chat bot could potentially understand and reply to its users if structured properly.
 As mentioned, DocBot can implement three different tasks:
 #### 1. Book an appointment: 
+---------------------------
 Users get to choose from a range of three different medical specialties (dermatologists, opthalmologists and gynaecologists) and select the doctor that they would like to visit. After the doctor's selection, DocBot provides its users with a calendar, showing available time and date. By clicking on the link provided, users can choose their desirable date and time and then fill the form with their personal information.
 
 #### 2. Cancel an appointment:
+------------------------------
 Users can cancel their appointment by providing the chatbot with their personal 10-digit soscial security number. Once that's done, DocBot can access the reservations system and cancel the booked appointment for them. 
 
 #### 3. Give information about the clinic:
+------------------------------------------
 Users can ask DocBot some information regarding the office hours, the clinic's address and the clinic's telephone number. DocBot replies successfully to all three queries.
 
 I believe, that this specific chat bot could evolve and be used in real life. As mentioned earlier, the fact that DocBot is not connected to any reservations system limits its possibilities, considering the fact that all the tasks fullfiled are a scenario of how the conversation between the agent and the user could evovle. I personally would like to become more familiar with the idea of slots, since they play an important role in the process of information storing and thus in the chat bot's overall performance. An ideal scenario would be its connection with an actual clinic's system. Considering the fact that booking an appointment can sometimes take way longer than it is supposed to, using DocBot can be a gamechanger.
