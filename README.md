@@ -6,7 +6,7 @@ As mentioned, DocBot can implement three different tasks:
 Users get to choose from a range of three different medical specialties (dermatologists, opthalmologists and gynaecologists) and select the doctor that they would like to visit. After the doctor's selection, DocBot provides its users with a calendar, showing available time and date. By clicking on the link provided, users can choose their desirable date and time and then fill the form with their personal information.
 
 #### 2. Cancel an appointment:
-Users can cancel their appointment by providing the chatbot with their personal 10-digit soscial security number. Once that's done, DocBot can access the reservations system and cancel the booked appointment for them. 
+Users can cancel their appointment by providing the chatbot with their personal 10-digit social security number. Once that's done, DocBot can access the reservations system and cancel the booked appointment for them. 
 
 #### 3. Give information about the clinic:
 Users can ask DocBot some information regarding the office hours, the clinic's address and the clinic's telephone number. DocBot replies successfully to all three queries.
