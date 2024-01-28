@@ -3,189 +3,126 @@
 #
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-# from typing import Any, Text, Dict, List
-# import arrow
-# import dateparser
-
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.events import 
-# from rasa_sdk.executor import CollectingDispatcher
-
-
-# class ActionHelloWorld(Action):
-
-#     def name(self) -> Text:
-#         return "action_hello_world"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         dispatcher.utter_message(text="Hello World!")
-
-#         return []
-
 from typing import Any, Text, Dict, List
 import arrow
 import dateparser
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-
-class ActionGreet(Action):
-    def name(self):
-        return "action_greet"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Hello! How can I assist you today?")
-        return []
-
-class ActionGoodbye(Action):
-    def name(self):
-        return "action_goodbye"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Goodbye! Have a great day!")
-        return []
-
-class ActionBotChallenge(Action):
-    def name(self):
-        return "action_bot_challenge"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("I am a bot. How can I assist you?")
-        return []
-
-class ActionAskForSocialSecurityNumber(Action):
-    def name(self):
-        return "action_ask_for_social_security_number"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Of course! I need your 10-digit social security number")
-        return []
+from rasa_sdk import FormValidationAction
+from rasa_sdk.forms import FormValidationAction
+from rasa_sdk.types import DomainDict, List, Optional, Text, Dict, Any
+from rasa_sdk.events import ActionExecuted
+from rasa_sdk.events import ReminderScheduled
+from rasa_sdk.events import UserUtteranceReverted
+import datetime
+import time
+import requests
+import pandas as pd
+import json
+import requests
 
 class ActionAskMedicalSpecialty(Action):
-    def name(self):
-        return "action_ask_med_specialty"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Got it! What type of doctor would you like to see? (e.g., dermatologist)")
-        return []
-
-class ActionSuggestOpthalmologistInfo(Action):
-    def name(self):
-        return "action_suggest_opthalmologist_show_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("There are 3 opthalmologists available. Please provide the name of the opthalmologist you want to visit.")
-        return []
-
-class ActionSuggestGynaecologistInfo(Action):
-    def name(self):
-        return "action_suggest_gynaecologist_show_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("There are 2 gynaecologists available. Please provide the name of the gynaecologist you want to visit.")
-        return []
-
-class ActionSuggestDermatologistInfo(Action):
-    def name(self):
-        return "action_suggest_dermatologist_show_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("There are 2 dermatologists available. Please provide the name of the dermatologist you want to visit.")
-        return []
-
-class ActionProposeDateTime(Action):
-    def name(self):
-        return "action_propose_date_time"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Great! Please choose a date and a time and complete the form: https://calendar.app.google/whroAPdvM8vGddkWA")
-        return []
-
-class ActionConfirmBooking(Action):
-    def name(self):
-        return "action_confirm_booking"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Your appointment is confirmed. Is there anything else I can help you with?")
-        return []
-
-class ActionCloseConversation(Action):
-    def name(self):
-        return "action_close_conversation"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("No problem. Let me know if you change your mind. Goodbye!")
-        return []
-
-# class ActionCancelAppointment(Action):
-#     def name(self):
-#         return "utter_ask_name_for_cancellation"
-
-#     def run(self, dispatcher, tracker, domain):
-#         dispatcher.utter_message("Absolutely! Please provide me with your full name as seen on your ID card in CAPITAL letters")
-#         return []
-
-class ActionVerifyCancellation(Action):
-    def name(self):
-        return "utter_verify_cancellation"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("Your appointment on 15/11/23 with Dr. Sekos has been cancelled. Is there anything else I can do for you?")
-        return []
-
-class ActionGiveAddressInfo(Action):
-    def name(self):
-        return "utter_give_address_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("The clinic's address is Praksitelous 34, Syntagma, Attiki, Athens")
+    def name(self) -> Text:
+        return "utter_ask_med_specialty"
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        buttons = [
+            {"title": "Dermatologist", "payload": "/dermatologist"},
+            {"title": "Opthalmologist", "payload": "/opthalmologist"},
+            {"title": "Gynaecologist", "payload": "/gynaecologist"}
+        ]
+        dispatcher.utter_message(text="Got it! What type of doctor would you like to see")
         return[]
 
-class ActionGiveTelNumberInfo(Action):
+class UtterAskDate(Action):
     def name(self):
-        return "utter_give_tel_number_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("The clinic's number is 12345678910. You can call Mon-Fri 09:30-12:00")
+        return "utter_ask_date"
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        dispatcher.utter_message(text="What day and time would you like to book?")
         return []
 
-class ActionGiveOfficeHoursInfo(Action):
+class UtterAskTime(Action):
     def name(self):
-        return "utter_give_officehours_info"
-
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message("The clinic is open Mon-Fri 08:30-17:00")
+        return "utter_ask_time"
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        dispatcher.utter_message(text="What time would you like to book?")
         return []
 
-# class ActionGiveEmergencyNumber(Action):
-#     def name(self):
-#         return "utter_give_emergency_number"
+class ActionCheckSocialSecurity(Action):
+    def name(self) -> str:
+        return "action_check_ssn"
 
-#     def run(self, dispatcher, tracker, domain):
-#         dispatcher.utter_message("In case of an emergency please call 210987654372937")
-#         return []
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        excel_file_path = 'C:\\Users\\kakam\\OneDrive\\Υπολογιστής\\my-Rasa_Project\\docbot_user_info.csv'
+        try:
+            df = pd.read_csv(excel_file_path)
+        except Exception as e:
+            dispatcher.utter_message(response="utter_excel_read_error")
+            return []
+        
+        user_input = tracker.get_slot('social_security_number')
+        date = tracker.get_slot('date')
+        time = tracker.get_slot('time')
+        df['SSN'] = df['SSN'].astype(str)
+        print("DataFrame Content:")
+        print(df)
+        print("User Input SSN:", user_input)
 
-# class ActionCancelAppointment(Action):
-#     def name(self):
-#         return "utter_ask_ssn_cancellation"
-    
-#     def run(self, dispatcher, tracker, domain):
-#         dispatcher.utter_message("Absolutely! I need your 10-digit social security number")
-#         return[]
+        matching_rows = df[df['SSN'].str.strip() == user_input.strip()]
+        print("Matching Rows:")
+        print(matching_rows)
 
-# class ActionConfirmCancellation(Action):
-#     def name(self):
-#         return "utter_verify_cancellation"
-    
-#     def run(self, dispatcher, tracker, domain):
-#         dispatcher.utter_message("Your appointment on 15/11/23 with Dr. Sekos has been cancelled. Is there anything else I can do for you?")
-#         return[]
-    
-# Define actions to handle the entities, if needed.
+        if not matching_rows.empty:
+            user_name = matching_rows.iloc[0]['Name']
+            appointment_info = f"{date} at {time}"
+            df.loc[df['SSN'] == user_input, 'Appointment'] = appointment_info
+            df.to_csv(excel_file_path, index=False)
+
+            dispatcher.utter_message(text=f"Thank you {user_name} 😀 Your appointment is confirmed for {date} at {time} 🎉")
+        else:
+            dispatcher.utter_message(text="Social security number not found. Please contact 800900100")
+        return []
+
+class ActionDefaultFallback(Action):
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(response="utter_default")
+        return [UserUtteranceReverted()]
+
+class ActionQueryHeartApi(Action):
+    def name(self) -> Text:
+        return "action_query_heart_api"
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        selected = requests.get("https://health.gov/myhealthfinder/api/v3/topicsearch.json?lang=en&keyword=heart")
+        s_data = json.loads(selected.text)
+        dispatcher.utter_message(text=s_data['Result']['Resources']['Resource'][0]['AccessibleVersion'])
+        return[]
+
+class ActionQueryFolicAcidApi(Action):
+    def name(self) -> Text:
+        return "action_query_folic_acid_api"
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        selected = requests.get("https://health.gov/myhealthfinder/api/v3/topicsearch.json?lang=en&keyword=folic")
+        s_data = json.loads(selected.text)
+        dispatcher.utter_message(text=s_data['Result']['Resources']['Resource'][0]['AccessibleVersion'])
+        return[]
+
+class ActionQueryFallingApi(Action):
+    def name(self) -> Text:
+        return "action_query_falling_api"
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        selected = requests.get("https://health.gov/myhealthfinder/api/v3/topicsearch.json?lang=en&keyword=falling")
+        s_data = json.loads(selected.text)
+        dispatcher.utter_message(text=s_data['Result']['Resources']['Resource'][0]['AccessibleVersion'])
+        return[]

@@ -15,7 +15,6 @@ pipeline:
 # # If you'd like to customize it, uncomment and adjust the pipeline.
 # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
 - name: WhitespaceTokenizer
-- name: RegexFeaturizer
 - name: RegexEntityExtractor
 - name: LexicalSyntacticFeaturizer
 - name: CountVectorsFeaturizer
@@ -32,9 +31,21 @@ pipeline:
   constrain_similarities: true
 - name: FallbackClassifier
   threshold: 0.3
-  ambiguity_threshold: 0.1
+  # ambiguity_threshold: 0.1
 - name: RegexEntityExtractor
   use_lookup_tables: true
+- name: CRFEntityExtractor
+- name: ResponseSelector
+  epochs: 100
+  retrieval_intent: faq
+- name: ResponseSelector
+  epochs: 100
+  retrieval_intent: chitchat
+# - name: DucklingEntityExtractorS
+#   url: "http://localhost:8000"
+  #url: http://localhost:<Desired Port, 1000>
+  #url: "http://localhost:8000"
+  #dimensions: ["time", "date"]
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
 policies:
@@ -43,6 +54,9 @@ policies:
 # # See https://rasa.com/docs/rasa/policies for more information.
 - name: MemoizationPolicy
 - name: RulePolicy
+  core_fallback_threshold: 0.4
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: True
 - name: UnexpecTEDIntentPolicy
   max_history: 5
   epochs: 100

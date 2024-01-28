@@ -1,56 +1,274 @@
 version: "3.1"
 
 stories:
- - story: book an appointment successfully
-   steps:
-   - intent: greet
-   - action: utter_greet
-   - intent: book_an_appointment
-   - action: utter_ask_med_specialty
-   - intent: medical_specialty_gynaecologist
-   - action: utter_suggest_gynaecologist_show_info
-   - intent: choose_a_gynaecologist
-     entities:
-     - name: doctor_name
-   - action: utter_propose_date_time
-   - intent: affirm
-   - action: utter_confirm_booking
-   - intent: deny
-   - action: utter_goodbye
+- story: book an appointment successfully (opthalmologist --> 1)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_opthalmologist
+    - action: utter_suggest_opthalmologist_show_info
+    - intent: georgiou_anna
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
 
- - story: Cancel an appointment successfully
-   steps:
-   - intent: cancel_appointment
-   - action: utter_ask_for_social_security_number
-   - intent: give_social_security_number
-     entities:
-     - social_security_number: '12345678900'
-   - action: utter_verify_cancellation
-   - intent: goodbye
-   - action: utter_goodbye
+- story: book an appointment successfully (opthalmologist --> 2)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_opthalmologist
+    - action: utter_suggest_opthalmologist_show_info
+    - intent: papadopoulos_konstantinos
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
 
- - story: User asks for clinic's address
-   steps:
-   - intent: greet
-   - action: utter_greet
-   - intent: ask_for_clinic_address
-   - action: utter_give_address_info 
+- story: book an appointment successfully (opthalmologist --> 3)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_opthalmologist
+    - action: utter_suggest_opthalmologist_show_info
+    - intent: ioannou_maria
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
 
- - story: User asks for clinic's telephone number
-   steps:
-   - intent: greet
-   - action: utter_greet
-   - intent: ask_for_clinic_tel
-   - action: utter_give_tel_number_info
+- story: book an appointment successfully (gynaecologist --> 1)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_gynaecologist
+    - action: utter_suggest_gynaecologist_show_info
+    - intent: papakonstantinou_zoi
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
 
- - story: User asks for clinic's office hours
-   steps:
-   - intent: greet
-   - action: utter_greet
-   - intent: ask_for_officehours
-   - action: utter_give_officehours_info 
+- story: book an appointment successfully (gynaecologist --> 2)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_gynaecologist
+    - action: utter_suggest_gynaecologist_show_info
+    - intent: sekos_christos
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
 
-#  - story: User asks for clinic's emergency number
-#    steps:
-#    - intent: ask_emergency_number
-#    - action: utter_give_emergency_number
+- story: book an appointment successfully (dermatologist --> 1)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_dermatologist
+    - action: utter_suggest_dermatologist_show_info
+    - intent: konstantinou_dimitrios
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
+
+- story: book an appointment successfully (dermatologist --> 2)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: book_an_appointment
+    - action: utter_ask_med_specialty
+    - intent: see_dermatologist
+    - action: utter_suggest_dermatologist_show_info
+    - intent: stavrou_amalia
+    - action: ask_date_time_form
+    - active_loop: ask_date_time_form
+    - slot_was_set:
+        - requested_slot: date
+    - slot_was_set:
+        - date: choose_date
+    - slot_was_set: 
+        - requested_slot: time
+    - slot_was_set: 
+        - time: choose_time
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: ask_ssn_form
+    - active_loop: ask_ssn_form
+    - slot_was_set: 
+        - requested_slot: social_security_number
+    - slot_was_set:
+        - social_security_number: ssn
+    - slot_was_set: 
+        - requested_slot: null
+    - active_loop: null
+    - action: action_check_ssn
+    - action: utter_provide_more_info
+
+- story: integrate API in RASA (heart)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_about_heart
+    - action: utter_give_link
+    - action: action_query_heart_api
+
+- story: integrate API in RASA (folic acid)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_about_folic_acid
+    - action: utter_give_link
+    - action: action_query_folic_acid_api
+
+- story: integrate API in RASA (falling)
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_about_falling
+    - action: utter_give_link
+    - action: action_query_falling_api
+
+# - story: suggest some healthy topics
+#   steps: 
+#     - intent: greet
+#     - action: utter_greet
+#     - action: utter_provide_more_info
+#     - intent: deny
+#     - action: utter_ask_about_faqs
+#     - intent: affirm
+#     - action: utter_suggest_health_topics

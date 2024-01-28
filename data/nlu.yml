@@ -1,6 +1,187 @@
 version: "3.1"
 
 nlu:
+- intent: book_an_appointment
+  examples:  |
+    - I would like to book an appointment with a doctor
+    - I want to book an appointment
+    - appointment
+    - can I book an appointment please?
+    - I want to book an apointment with a doctor
+    - doctor appointment
+    - I need to see a doctor
+    - appointment with a doctor
+    - doctor
+    - doc appt
+
+- intent: see_opthalmologist
+  examples:  |
+    - opthalmologist
+    - i need to see an ophtalmologist
+    - i would like to see an ophtalmologist
+    - an ophtalmologist please
+
+- intent: see_gynaecologist
+  examples:  |
+    - gynaecologist
+    - i need to see a gynaecologist
+    - i would like to see a gynaecologist
+    - a gynaecologist please
+
+- intent: see_dermatologist
+  examples:  |
+    - dermatologist
+    - i need to see a dermatologist
+    - i would like to see a dermatologist
+    - a dermatologist please
+    
+- intent: propose_date
+  examples:  |
+   - I propose an appointment on [2023-12-25](choose_date).
+   - How about scheduling it for [tomorrow](choose_date)?
+   - I want to see a doctor on [Saturday 23/04](choose_date)
+   - Let's meet on [Friday](choose_date).
+   - I want an appointment on [Monday](choose_date)
+   - [Tuesday](choose_date)
+   - Book an appointment for [tomorrow](choose_date)
+   - I want to see a doctor [the day after tomorrow](choose_date)
+   - [Wednesday](choose_date)
+   - on Thursday(choose_date)
+
+- intent: propose_time
+  examples:  |
+   - book an appointment at [12 pm](choose_time)
+   - I want to visit the doctor at [13:30](choose_time)
+   - at [10 am](choose_time)
+
+
+- intent: give_ssn
+  examples:  |
+   - [102030405003](ssn)
+   - [160397004563](ssn)
+   - my social security number is [13562782865](ssn)
+   - it's [742568945818](ssn)
+- regex: ssn
+  examples:  |
+   - ^\d{11}$
+
+- intent: explain
+  examples:  |
+    - Why do you need this information?
+    - Why should I give it to you?
+    - What is this for?
+    - why do you need that?
+
+- intent: out_of_scope
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+    - Which city has the biggest population in the world?
+    - I want to buy new clothes
+    - I need a job
+    - How can I pay my bills?
+
+- intent: ask_about_heart
+  examples:  |
+    - can you please tell me how I can keep my heart healthy?
+    - how can I maintain a healthy heart?
+    - how to keep my heart in good shape
+    - tell me more about healthy hearts
+    - give me some advice for a healthy heart
+
+- intent: ask_about_folic_acid
+  examples:  |
+    - is folic acid necessary?
+    - tell me about folic acid
+    - more info about folic acid
+    - How much folic acid do I need?
+
+- intent: ask_about_falling
+  examples:  |
+    - how can I lower my risk of falling?
+    - tell me more about falling
+    - how can I prevent falling?
+    - is there a way to lower the chances of falling?
+    - What steps should I follow to not fall?
+
+- intent: chitchat/ask_name
+  examples:  |
+    - What is your name?
+    - May I know your name?
+    - What do people call you?
+    - Who are you?
+
+- intent: chitchat/ask_age
+  examples:  |
+    - How old are you?
+    - Are you old?
+    - What is your age?
+    - Are you young?
+
+- intent: chitchat/ask_origin
+  examples:  |
+    - Where are you from?
+    - Are you from Greece?
+    - What is your origin?
+
+- intent: chitchat/ask_weather
+  examples:  |
+    - What's the weather like today?
+    - Does it look sunny outside today?
+    - Oh, do you mind checking the weather for me please?
+     
+- intent: chitchat/ask_colour
+  examples:  |
+    - Do you have a favorite colour?
+    - What is your favorite colour?
+    - Do you like the colour red?
+
+- intent: chitchat/ask_mood
+  examples:  |
+    - How are you doing today?
+    - How are you?
+    - How's your mood?
+    - Is your day going well?
+
+- intent: faq/tell_me_about_you
+  examples:  |
+    - Can you tell me a few things about you?
+    - Tell me about you
+    - Describe yourself
+
+- intent: faq/ask_opening_hours
+  examples:  |
+    - What days and time is the clinic working?
+    - When can I visit the clinic?
+    - what are the office hours?
+    - what time does the clinic open?
+    - what time does the clinic close?
+    - can I please have the office hours?
+    - When can I call the clinic?
+    - What time can I call the clinic?
+
+- intent: faq/ask_adress
+  examples:  |
+    - Where is the clinic located?
+    - What is the adress of the clinic?
+    - How can I find the clinic?
+    - Can you please tell me how to get to the clinic?
+
+- intent: faq/ask_prices
+  examples:  |
+    - How much does a doctor's visit cost?
+    - How much will I pay to see a doctor?
+    - How much does the clinic charge for every visit?
+    - What are the prices ?
+    - How much does an appointment cost?
+
+- intent: faq/ask_phone_number
+  examples:  |
+    - What is the clinic's number?
+    - How can I call the clinic?
+    - I want to call the clinic
+
 - intent: greet
   examples: |
     - hey
@@ -59,172 +240,3 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
-- intent: book_an_appointment
-  examples:  |
-    - I would like to book an appointment with a doctor
-    - I want to book an appointment
-    - appointment
-    - can I book an appointment please?
-    - I want to book an apointment with a doctor
-    - doctor appointment
-    - I need to see a doctor
-    - appointment with a doctor
-    - doctor
-    - doc appt
-
-- intent: greet_and_book_same_sentence
-  examples:  |
-    - hi i would like to book an appointment with a doctor?
-    - hello can I please book an appointment with a doctor?
-
-- intent: give_social_security_number
-  examples:  |
-    - my social security number is [123456789]{"entity": "social_security_number"}
-    - [123456789]{"entity": "social_security_number"}
-    - it's [123456789]{"entity": "social_security_number"}
-- regex: social_security_number
-  examples:  |
-    - \d{11}
-
-- intent: medical_specialty_opthalmologist
-  examples:  |
-    - opthalmologist
-    - i need to see an ophtalmologist
-    - i would like to see an ophtalmologist
-    - an ophtalmologist please
-
-- intent: medical_specialty_gynaecologist
-  examples:  |
-    - gynaecologist
-    - i need to see a gynaecologist
-    - i would like to see a gynaecologist
-    - a gynaecologist please
-
-- intent: medical_specialty_dermatologist
-  examples:  |
-    - dermatologist
-    - i need to see a dermatologist
-    - i would like to see a dermatologist
-    - a dermatologist please
-
-- intent: choose_an_opthalmologist
-  examples:  |
-    - I would like to book an appointment with [Dr. Papadopoulos Konstantinos](doctor_name)
-    - [Dr. Papadopoulos Konstantinos](doctor_name)
-    - [Dr. Papadopoulos](doctor_name)
-    - [Papadopoulos Konstantinos](doctor_name)
-    - [Papadopoulos](doctor_name)
-    - [Dr. Georgiou Anna](doctor_name)
-    - [Georgiou Anna](doctor_name)
-    - [Georgiou](doctor_name)
-    - [Dr. Ioannou Maria](doctor_name)
-    - [Ioannou Maria](doctor_name)
-    - [Ioannou](doctor_name)
- 
-- lookup: doctor_name
-  examples:  |
-   - Dr. Mpekou Anastasia
-   - Mpekou Anastasia
-   - Mpekou
-
-- intent: choose_a_gynaecologist
-  examples:  |
-    - I would like to book an appointment with [Dr. Papakonstantinou Zoi](doctor_name)
-    - [Dr. Papakonstantinou Zoi](doctor_name)
-    - [Dr. Papakonstantinou](doctor_name)
-    - [Papakonstantinou Zoi](doctor_name)
-    - [Papakonstantinou](doctor_name)
-    - [Dr. Sekos Christos](doctor_name)
-    - [Sekos Christos](doctor_name)
-    - [Sekos](doctor_name)
-
-- lookup: doctor_name
-  examples:  |
-   - Dr. Mpekou Anastasia
-   - Mpekou Anastasia
-   - Mpekou
-
-- intent: choose_a_dermatologist
-  examples:  |
-    - I would like to book an appointment with [Dr. Konstantinou Dimitrios](doctor_name)
-    - [Dr. Konstantinou Dimitrios](doctor_name)
-    - [Dr. Konstantinou](doctor_name)
-    - [Konstantinou Dimitrios](doctor_name)
-    - [Konstantinou](doctor_name)
-    - [Dr. Stavrou Amalia](doctor_name)
-    - [Stavrou Amalia](doctor_name)
-    - [Stavrou](doctor_name)
-    
-- lookup: doctor_name
-  examples:  |
-   - Dr. Mpekou Anastasia
-   - Mpekou Anastasia
-   - Mpekou
-
-- intent: cancel_appointment
-  examples:  |
-    - hi, i would like to cancel my appointment
-    - cancel doctor's appointment
-    - cancel appointment
-    - cancel the appointment with [Dr. Konstantinou](doctor_name)
-    - i want to cancel my appointment with the dermatologist
-
-- lookup: doctor_name
-  examples:  |
-    - Dr. Konstantinou
-    - Dr. Stavrou
-    - Dr. Sekos
-    - Dr. Papakonstantinou
-
-# - intent: give_name_for_cancellation
-#   examples:  |
-#     - [ZOI EMMANOUILIDOU](patient_name)
-#     - [MARIA PAPADOPOULOU](patient_name)
-# - lookup: patient_name
-#   examples:  |
-#     - KONSTANTINIDOU ELENA
-#     - PAPACHRISTOU GEORGIOS
-#     - MARKOU DIMITRIOS
-#     - AVRAMIDIS PARASKEVAS
-
-- intent: ask_for_clinic_address
-  examples:  |
-    - can I please have the clinic's address?
-    - clinic's address
-    - address
-    - where is the clinic?
-    - clinic's location
-    - clinic location
-    - location
-    - where clinic
-
-- intent: ask_for_clinic_tel
-  examples:  |
-    - clinic's telephone number
-    - can I please have the clinic's number?
-    - telephone number
-    - I want to call the clinic
-    - call clinic telephone number
-    - clinic's secretary number
-
-- intent: ask_for_officehours
-  examples:  |
-    - what are the office hours?
-    - what time does the clinic open?
-    - what time does the clinic close?
-    - office hours 
-    - can I please have the office hours?
-
-# - intent: ask_emergency_number
-#   examples:  |
-#    - emergency
-#    - emergency number
-#    - I need the emergency number
-
-# - intent: thank 
-#   examples:  |
-#     - thank you
-#     - thanks
-#     - ty
-#     - thanks for the help

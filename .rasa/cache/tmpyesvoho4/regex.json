@@ -1,0 +1,14 @@
+[
+  {
+    "name": "phone_number",
+    "pattern": "^\\d{10}$"
+  },
+  {
+    "name": "ssn",
+    "pattern": "^\\d{11}$"
+  },
+  {
+    "name": "disease",
+    "pattern": "(\\bHIV\\b|\\bHepatitis\\ B\\b|\\banxiety\\b|\\bstroke\\b)"
+  }
+]

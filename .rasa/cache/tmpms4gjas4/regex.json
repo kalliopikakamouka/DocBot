@@ -1,0 +1,10 @@
+[
+  {
+    "name": "name",
+    "pattern": "(\\bNasia\\b|\\bMaria\\b|\\bJohn\\b|\\bAntonio\\b|\\bMarkos\\b)"
+  },
+  {
+    "name": "surname",
+    "pattern": "(\\bSalari\\b|\\bIoannou\\b|\\bPetrou\\b|\\bMüller\\b|\\bRouvas\\b)"
+  }
+]

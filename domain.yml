@@ -7,28 +7,68 @@ intents:
   - deny
   - book_an_appointment
   - bot_challenge
-  - greet_and_book_same_sentence
-  - give_social_security_number
-  - medical_specialty_opthalmologist
-  - medical_specialty_gynaecologist
-  - medical_specialty_dermatologist
-  - choose_an_opthalmologist
-  - choose_a_gynaecologist
-  - choose_a_dermatologist
-  - accept_proposed_date_time
-  - cancel_appointment
-  - give_name_for_cancellation
-  - ask_for_clinic_address
-  - ask_for_clinic_tel
-  - ask_for_officehours
-  # - ask_emergency_number
-  # - thank
+  - see_opthalmologist
+  - see_gynaecologist
+  - see_dermatologist
+  - georgiou_anna
+  - papadopoulos_konstantinos
+  - ioannou_maria
+  - papakonstantinou_zoi
+  - sekos_christos
+  - stavrou_amalia
+  - konstantinou_dimitrios
+  - propose_date
+  - propose_time
+  - give_phone_number
+  - give_email
+  - give_ssn
+  - chitchat
+  - faq
+  - explain
+  - ask_about_folic_acid
+  - ask_about_heart
+  - ask_about_falling
 
 entities: 
-  - place
-  - doctor_name
-# - patient_name
-  - social_security_number
+  - choose_date
+  - choose_time
+  - give_name
+  - give_surname
+  - give_phone_number
+  - give_email
+  - ssn
+
+slots:
+ date:
+  type: text
+  influence_conversation: true
+  mappings:
+  - type: from_entity
+    entity: choose_date
+
+ time:
+  type: text
+  influence_conversation: true
+  mappings:
+  - type: from_entity
+    entity: choose_time    
+
+ social_security_number:
+  type: text
+  influence_conversation: true
+  mappings:
+  - type: from_entity
+    entity: ssn
+
+forms:
+  ask_date_time_form:
+    required_slots:
+        - date
+        - time
+  
+  ask_ssn_form:
+    required_slots:
+       - social_security_number
 
 responses:
   utter_greet:
@@ -40,44 +80,137 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-  utter_ask_for_social_security_number:
-  - text: 'Of course! I need your 10-digit social security number'
-
   utter_ask_med_specialty: 
-  - text: 'Got it! What type of doctor would you like to see? (you could say: dermatologist)'
+  - text: 'Got it! What type of doctor would you like to see?'
+    buttons:
+      - title: "Dermatologist"
+        payload: "/see_dermatologist"
+      - title: "Opthalmologist"
+        payload: "/see_opthalmologist"
+      - title: "Gynaecologist"
+        payload: "/see_gynaecologist"
 
   utter_suggest_opthalmologist_show_info:
-  - text: "there are 3 opthalmologists available: Dr. Papadopoulos Konstantinos, Dr. Georgiou Anna and Ioannou Maria. Which doctor would you like to visit?"
+  - text: "there are 3 opthalmologists available. Which doctor would you like to visit?"
+    buttons:
+      - title: "Dr. Papadopoulos Konstantinos"
+        payload: "/papadopoulos_konstantinos"
+      - title: "Dr. Georgiou Anna"
+        payload: "/georgiou_anna"
+      - title: "Dr. Ioannou Maria"
+        payload: "/ioannou_maria"
 
   utter_suggest_gynaecologist_show_info:
-  - text: "there are 2 gynaecologists available: Dr. Papakonstantinou Zoi and Dr. Sekos Christos. Which doctor would you like to visit?"
+  - text: "there are 2 gynaecologists available. Which doctor would you like to visit?"
+    buttons:
+      - title: "Dr. Papakonstantinou Zoi"
+        payload: "/papakonstantinou_zoi"
+      - title: "Dr. Sekos Christos"
+        payload: "/sekos_christos"
 
   utter_suggest_dermatologist_show_info:
-  - text: "there are 2 dermatologists available: Dr. Konstantinou Dimitrios and Dr. Stavrou Amalia. Which doctor would you like to visit?"
+  - text: "there are 2 dermatologists available. Which doctor would you like to visit?"
+    buttons:
+      - title: "Dr. Konstantinou Dimitrios"
+        payload: "/konstantinou_dimitrios"
+      - title: "Dr. Stavrou Amalia"
+        payload: "/stavrou_amalia"
+
+  utter_ask_date: 
+  - text: "What day and time would you like to book?"
+
+  utter_ask_time: 
+  - text: "What time would you like to book?"
+
+  utter_ask_social_security_number: 
+  - text: "In order to proceed with booking, I need your 11-digit Social Security Number"
+
+  utter_explain_ssn:
+  - text: "I need your Social Security Number in order to check that you are registered in our system"
+
+  utter_ssn_found:
+  - text: "Thank you {user_name} 😀"
+
+  utter_ssn_not_found:
+  - text: "Social security number not found. Please contact 800900100"
+
+  utter_ask_ssn_cancelation:
+  - text: "In order to check your appointment I need your 11-digit Social Security Number"
+
+  utter_out_of_scope:
+  - text: "Sorry, I can't answer this question. However I can help you book a doctor's appointment 👩🏼‍⚕️👨🏽‍⚕️"
+
+  utter_please_rephrase:
+  - text: "I'm sorry, I didn't catch that. Could you please rephrase?"
+
+  action_ask_user_for_confirmation:
+  - text: "I see that you have an appointment on {appointment_date}. Would you like to cancel it?"
+
+  # utter_ask_rephrase:
+  # - text: "I'm sorry, I didn't quite understand that. Could you rephrase?"
+
+  utter_default:
+  - text: "Sorry I didn't get that. Can you rephrase?"
+
+  utter_chitchat/ask_name:
+  - text: "My name is DocBot"
+  - text: "My name is Bot, DocBot"
+  - text: "Nice to meet you, I'm DocBot"
+
+  utter_chitchat/ask_age:
+  - text: "Age is just a number"
+  - text: "I am as old as I feel"
+  - text: "I can't tell you my age, what I can say is that I wasn't born yesterday 😂"
+
+  utter_chitchat/ask_origin:
+  - text: "I come from Greece"
+  - text: "I have a greek origin"
+
+  utter_chitchat/ask_weather:
+  - text: "Unfortunately, I cannot provide information about the weather. However you can check this website: https://meteo.gr/"
+
+  utter_chitchat/ask_colour:
+  - text: "My favorite colour is blue 🌊🩵"
+
+  utter_chitchat/ask_mood:
+  - text: "I am doing great today, thank you"
+  - text: "I'm fine thank you"
+
+  utter_faq/ask_opening_hours:
+  - text: "The clinic is open: Monday-Friday 08:30-17:30"
+
+  utter_faq/ask_adress:
+  - text: "The clinic's address is: **Hospital 12** in Athens, Greece: https://www.google.com/maps/d/edit?mid=1wc8V56ujDvoe_OUDqLB3-sz-JYmI0J4&ll=37.971774986533845%2C23.7265&z=18" 
+
+  utter_faq/ask_prices:
+  - text: "The standard price for a doctor's appointment is 40€.
+  Prices change for the following two groups:
+  1. Students --> 20€
+  2. Unemployed people --> 10€"
   
-  utter_propose_date_time:
-  - text: "Great! Please choose a date and a time and complete the form: https://calendar.app.google/whroAPdvM8vGddkWA"
+  utter_faq/ask_phone_number:
+  - text: "You can reach our clinic by calling this number: +30 2102102102"
 
-  utter_confirm_booking:
-  - text: "Your appointment is confirmed. Is there anything else I can help you with?"
+  utter_faq/tell_me_about_you:
+  - text: "I am DocBot. I am designed to assist you in various tasks:
+  1. I can help you book a doctor's appointment
+  2. I can give you information about our clinic
+  3. I can give you dome interesting facts about various health topics"
 
-  utter_ask_name_for_cancellation:
-  - text: "Absolutely! Please provide me with your full name as seen on your ID card in CAPITAL letters"
+  utter_give_link:
+  - text: "Here is the link for this subject"
 
-  utter_verify_cancellation:
-  - text: "Your appointment on 15/11/23 with Dr. Sekos has been cancelled. Is there anything else I can do for you?"
+  utter_provide_more_info:
+  - text: "Is there anything else I can help you with?"
 
-  utter_give_address_info:
-  - text: "The clinic's address is Praksitelous 34, Syntagma, Attiki, Athens"
+  # utter_ask_about_faqs:
+  # - text: "Would you like to learn some fun facts about a few health topics?"
 
-  utter_give_tel_number_info:
-  - text: "The clinic's number is 12345678910. You can call Mon-Fri 09:30-12:00"
-
-  utter_give_officehours_info:
-  - text: "The clinic is open Mon-Fri 08:30-17:00"
-
-  # utter_give_emergency_number:
-  # - text: "In case of an emergency please call 210987654372937"
+  # utter_suggest_health_topics:
+  # - text: "You can choose from the following list:
+  # 1. How to keep your heart healthy
+  # 2. Information on folic acid intake
+  # 3. How to preven falling"
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -86,18 +219,26 @@ actions:
   - utter_greet
   - utter_goodbye
   - utter_iamabot
-  # - utter_greet_and_initiate_booking
-  - utter_ask_for_social_security_number
   - utter_ask_med_specialty
   - utter_suggest_opthalmologist_show_info
   - utter_suggest_gynaecologist_show_info
   - utter_suggest_dermatologist_show_info
-  - utter_propose_date_time
-  - utter_confirm_booking
-  - utter_ask_name_for_cancellation
-  - utter_verify_cancellation
-  - utter_give_address_info
-  - utter_give_tel_number_info
-  - utter_give_officehours_info
-  # - utter_give_emergency_number
-  # - utter_cancel_appointment_send_confirmation
+  - utter_ask_date
+  - utter_ask_time
+  - utter_ask_social_security_number
+  - action_check_ssn
+  - utter_ssn_found
+  - utter_ssn_not_found
+  - action_delay
+  - utter_explain_ssn
+  - utter_out_of_scope
+  - utter_please_rephrase
+  - utter_default
+  - action_default_fallback
+  - action_query_heart_api
+  - action_query_falling_api
+  - action_query_folic_acid_api
+  - utter_give_link
+  - utter_provide_more_info
+  - utter_ask_about_faqs
+  - utter_suggest_health_topics
