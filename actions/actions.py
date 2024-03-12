@@ -18,6 +18,7 @@ from rasa_sdk.events import UserUtteranceReverted
 import datetime
 import time
 import requests
+import re
 import pandas as pd
 import json
 import requests
@@ -126,3 +127,80 @@ class ActionQueryFallingApi(Action):
         s_data = json.loads(selected.text)
         dispatcher.utter_message(text=s_data['Result']['Resources']['Resource'][0]['AccessibleVersion'])
         return[]
+
+class ActionAskWeight(Action):
+    def name(self) -> Text:
+        return "utter_ask_weight_kgs"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        weight_kgs = tracker.get_slot('weight_kgs')
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        dispatcher.utter_message(text="In order to calculate your BMI, I need your weight in KG (example: 65)")
+        return []
+    
+class ActionAskHeight(Action):
+    def name(self) -> Text:
+        return "utter_ask_height_cm"
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        dispatcher.utter_message(text="Please provide me with your height in CM as well (example: 170)")
+        return []
+    
+class ActionBMIResults(Action):
+    def name(self) -> Text:
+        return "action_BMI_results"
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        weight = tracker.get_slot("weight_kgs")
+        height = tracker.get_slot("height_cm")
+
+        match = re.findall(r'\d+\.\d+|\d+', weight)
+        weight_num = float(match[0]) if match else None
+
+        match = re.findall(r'\d+', height)
+        height_num = float(match[0]) if match else None
+
+        print("Extracted: w=",weight_num," h:",height_num)
+
+        try:
+            url = f'https://www.calculateconvert.com/calculators/health/bmi.php?kgs={weight_num}&cm={height_num}'
+            x = requests.get(url)
+            if(x.status_code == 200):
+                pattern = b"your BMI is (\d+\.\d+)"
+                match = re.search(pattern, x.content)
+                if match:
+                    bmi_value = float(match.group(1))
+                    pattern = b"style=\"color:yellow;\">(\w+)"
+                    match = re.search(pattern, x.content)
+                    if match:
+                        status = match.group(1).decode('utf-8')
+                    else:
+                        status = "Could not determine"
+                    dispatcher.utter_message(text=f"Your BMI based on your information is: {bmi_value}⏲️\nYour BMI scale status is: {status}")
+                else:
+                    dispatcher.utter_message(text=f"Error calculating, check your spelling")
+            else:
+                dispatcher.utter_message(text=f"Error fetching the data, try again later")
+        except:
+            dispatcher.utter_message(text=f"Server is unfortunatelly unavailable at the moment.")
+        return []
+
+
+# class SSNForm(FormValidationAction):
+#     def name(self) -> str:
+#         return "validate_ssn_form"
+
+#     def validate_social_security_number(
+#         self,
+#         value: Text,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: Dict[Text, Any],
+#     ) -> Dict[Text, Any]:
+#         if len(value) == 11 and value.isdigit():
+#             return {"social_security_number": value}
+#         else:
+#             dispatcher.utter_message("Hmm, this doesn't look right. Please provide a valid 11-digit social security number.")
+#             return {"social_security_number": None}
+
+#     # def validate(self, dispatcher: CollectingDispatcher,
+#     #              tracker: Tracker,
+#     #              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:

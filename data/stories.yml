@@ -263,6 +263,27 @@ stories:
     - action: utter_give_link
     - action: action_query_falling_api
 
+- story: calculate BMI
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_BMI_calc
+    - action: ask_weight_height_BMI_form
+    - active_loop: ask_weight_height_BMI_form
+    - slot_was_set: 
+      - requested_slot: weight_kgs
+    - slot_was_set:
+      - weight_kgs: from_text
+    - slot_was_set:
+      - requested_slot: height_cm
+    - slot_was_set:
+      - height_cm: from_text
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+    - action: action_BMI_results
+    # - action: action_BMI_calculation
+
 # - story: suggest some healthy topics
 #   steps: 
 #     - intent: greet

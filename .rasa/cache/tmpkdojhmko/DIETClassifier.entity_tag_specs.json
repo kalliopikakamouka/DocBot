@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-choose_date",
+      "2": "I-choose_date",
+      "3": "L-choose_date",
+      "4": "U-choose_date",
+      "5": "B-choose_time",
+      "6": "I-choose_time",
+      "7": "L-choose_time",
+      "8": "U-choose_time",
+      "9": "B-ssn",
+      "10": "I-ssn",
+      "11": "L-ssn",
+      "12": "U-ssn",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-choose_date": 1,
+      "I-choose_date": 2,
+      "L-choose_date": 3,
+      "U-choose_date": 4,
+      "B-choose_time": 5,
+      "I-choose_time": 6,
+      "L-choose_time": 7,
+      "U-choose_time": 8,
+      "B-ssn": 9,
+      "I-ssn": 10,
+      "L-ssn": 11,
+      "U-ssn": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

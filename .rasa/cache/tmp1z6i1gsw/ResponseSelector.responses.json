@@ -1,0 +1,80 @@
+{
+  "utter_chitchat/ask_name": [
+    {
+      "text": "My name is DocBot"
+    },
+    {
+      "text": "My name is Bot, DocBot"
+    },
+    {
+      "text": "Nice to meet you, I'm DocBot"
+    }
+  ],
+  "utter_chitchat/ask_age": [
+    {
+      "text": "Age is just a number"
+    },
+    {
+      "text": "I am as old as I feel"
+    },
+    {
+      "text": "I can't tell you my age, what I can say is that I wasn't born yesterday 😂"
+    }
+  ],
+  "utter_chitchat/ask_origin": [
+    {
+      "text": "I come from Greece"
+    },
+    {
+      "text": "I have a greek origin"
+    }
+  ],
+  "utter_chitchat/ask_weather": [
+    {
+      "text": "Unfortunately, I cannot provide information about the weather. However you can check this website: https://meteo.gr/"
+    }
+  ],
+  "utter_chitchat/ask_colour": [
+    {
+      "text": "My favorite colour is blue 🌊🩵"
+    }
+  ],
+  "utter_chitchat/ask_mood": [
+    {
+      "text": "I am doing great today, thank you"
+    },
+    {
+      "text": "I'm fine thank you"
+    }
+  ],
+  "utter_faq/ask_opening_hours": [
+    {
+      "text": "The clinic is open: Monday-Friday 08:30-17:30"
+    }
+  ],
+  "utter_faq/ask_adress": [
+    {
+      "text": "The clinic's address is: **Hospital 12** in Athens, Greece: https://www.google.com/maps/d/edit?mid=1wc8V56ujDvoe_OUDqLB3-sz-JYmI0J4&ll=37.971774986533845%2C23.7265&z=18"
+    }
+  ],
+  "utter_faq/ask_prices": [
+    {
+      "text": "The standard price for a doctor's appointment is 40€. Prices change for the following two groups: 1. Students --> 20€ 2. Unemployed people --> 10€"
+    }
+  ],
+  "utter_faq/ask_phone_number": [
+    {
+      "text": "You can reach our clinic by calling this number: +30 2102102102"
+    }
+  ],
+  "utter_faq/tell_me_about_you": [
+    {
+      "text": "I am DocBot. I am designed to assist you in various tasks: 1. I can help you book a doctor's appointment 2. I can give you information about our clinic 3. I can give you some interesting facts about various health topics"
+    }
+  ],
+  "utter_faq/ask_services": [
+    {
+      "text": "DocBot offers 3 main services. With Docbot you can: 1. Book a doctor's appointment 2. Get informed about three health topics (heart/ folic acid/ falling) 3. Calculate and find your BMI"
+    }
+  ]
+}

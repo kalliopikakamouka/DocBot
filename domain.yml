@@ -28,6 +28,7 @@ intents:
   - ask_about_folic_acid
   - ask_about_heart
   - ask_about_falling
+  - ask_BMI_calc
 
 entities: 
   - choose_date
@@ -60,6 +61,24 @@ slots:
   - type: from_entity
     entity: ssn
 
+ weight_kgs:
+  type: text
+  influence_conversation: true
+  mappings:
+    - type: from_text
+      conditions:
+      - active_loop: ask_weight_height_BMI_form
+        requested_slot: weight_kgs
+
+ height_cm:
+  type: text
+  influence_conversation: true
+  mappings:
+    - type: from_text
+      conditions:
+      - active_loop: ask_weight_height_BMI_form
+        requested_slot: height_cm
+
 forms:
   ask_date_time_form:
     required_slots:
@@ -69,6 +88,11 @@ forms:
   ask_ssn_form:
     required_slots:
        - social_security_number
+
+  ask_weight_height_BMI_form:
+    required_slots:
+       - weight_kgs
+       - height_cm
 
 responses:
   utter_greet:
@@ -195,13 +219,25 @@ responses:
   - text: "I am DocBot. I am designed to assist you in various tasks:
   1. I can help you book a doctor's appointment
   2. I can give you information about our clinic
-  3. I can give you dome interesting facts about various health topics"
+  3. I can give you some interesting facts about various health topics"
+
+  utter_faq/ask_services:
+  - text: "DocBot offers 3 main services. With Docbot you can:
+  1. Book a doctor's appointment
+  2. Get informed about three health topics (heart/ folic acid/ falling)
+  3. Calculate and find your BMI"
 
   utter_give_link:
   - text: "Here is the link for this subject"
 
   utter_provide_more_info:
   - text: "Is there anything else I can help you with?"
+
+  utter_ask_weight_kgs:
+  - text: "In order to calculate your BMI, I need your weight in KG (example: 65)"
+
+  utter_ask_height_cm:
+  - text: "Please provide me with your height in CM as well (example: 170)"
 
   # utter_ask_about_faqs:
   # - text: "Would you like to learn some fun facts about a few health topics?"
@@ -240,5 +276,10 @@ actions:
   - action_query_folic_acid_api
   - utter_give_link
   - utter_provide_more_info
-  - utter_ask_about_faqs
-  - utter_suggest_health_topics
+  #- utter_ask_about_faqs
+  #- utter_suggest_health_topics
+  - utter_ask_weight_kgs
+  - utter_ask_height_cm
+  - action_BMI_results
+  # - action_BMI_calculation
+  # - utter_BMI_results

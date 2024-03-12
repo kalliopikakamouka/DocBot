@@ -46,14 +46,13 @@ nlu:
    - Book an appointment for [tomorrow](choose_date)
    - I want to see a doctor [the day after tomorrow](choose_date)
    - [Wednesday](choose_date)
-   - on Thursday(choose_date)
+   - on [Thursday](choose_date)
 
 - intent: propose_time
   examples:  |
    - book an appointment at [12 pm](choose_time)
    - I want to visit the doctor at [13:30](choose_time)
    - at [10 am](choose_time)
-
 
 - intent: give_ssn
   examples:  |
@@ -158,9 +157,7 @@ nlu:
     - what time does the clinic open?
     - what time does the clinic close?
     - can I please have the office hours?
-    - When can I call the clinic?
-    - What time can I call the clinic?
-
+  
 - intent: faq/ask_adress
   examples:  |
     - Where is the clinic located?
@@ -181,6 +178,21 @@ nlu:
     - What is the clinic's number?
     - How can I call the clinic?
     - I want to call the clinic
+
+- intent: faq/ask_services
+  examples:  |
+    - What does DocBot offer?
+    - What options do I have with this chatbot?
+    - What actions can I do with DocBot?
+
+- intent: ask_BMI_calc
+  examples:  |
+    - I want to know my BMI
+    - please calculate my BMI
+    - BMI
+    - is my weight and height normal?
+    - calculate my weight and height
+    - BMI calculation
 
 - intent: greet
   examples: |

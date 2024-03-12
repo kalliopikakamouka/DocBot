@@ -1,0 +1,7 @@
+{
+  "rule_only_slots": [],
+  "rule_only_loops": [
+    "ask_ssn_form",
+    "ask_date_time_form"
+  ]
+}
