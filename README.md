@@ -1,6 +1,6 @@
 # DocBot 🩺💊
 
-This is my Project for the course M913 ("Διαλογικά Συστήματα και Φωνητικοί Βοηθοί"). Using RASA as my base, I had the chance to create my own, personalized chatbot called DocBot. What DocBot does revolves around the following functions:</br>
+This is my Project for the course M913 ("Conversational Systems & Voice Agents / Διαλογικά Συστήματα και Φωνητικοί Βοηθοί"). Using RASA, I had the chance to create my own, personalized chatbot called "**DocBot**". These are its functions:</br>
 
 1. Book appointments with the use of slots and forms making the chatbot more dynamic.
 2. Connect with an Excel file, which works as a dummy database
